@@ -1140,14 +1140,13 @@ VOID CFG80211OS_RecvObssBeacon(VOID *pCB, const PUCHAR pFrame, INT frameLen, INT
 {
 	CFG80211_CB *pCfg80211_CB = (CFG80211_CB *)pCB;
 	struct wiphy *pWiphy = pCfg80211_CB->pCfg80211_Wdev->wiphy;
-
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,3,0))
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,4,0))
-        cfg80211_report_obss_beacon(pWiphy, pFrame,frameLen, freq, 50, GFP_ATOMIC);
-#else
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,16,0))
+	cfg80211_report_obss_beacon(pWiphy, pFrame,frameLen, freq, 50);
+#elif (LINUX_VERSION_CODE >= KERNEL_VERSION(3,4,0))
+	cfg80211_report_obss_beacon(pWiphy, pFrame,frameLen, freq, 50, GFP_ATOMIC);
+#elif (LINUX_VERSION_CODE >= KERNEL_VERSION(3,3,0))
 	cfg80211_report_obss_beacon(pWiphy, pFrame,frameLen, freq, GFP_ATOMIC);
-#endif /*LINUX_VERSION_CODE: 3.4.0*/
-#endif /* LINUX_VERSION_CODE: 3.3.0 */	
+#endif
 }
 
 #endif /* RT_CFG80211_SUPPORT */
