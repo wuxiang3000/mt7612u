@@ -1856,7 +1856,7 @@ static int CFG80211_OpsRemainOnChannel(
 static void CFG80211_OpsMgmtFrameRegister(
     struct wiphy *pWiphy,
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,6,0))
-	struct wireless_dev *wdev
+	struct wireless_dev *wdev,
 #else	
     struct net_device *dev,
 #endif /* LINUX_VERSION_CODE: 3.6.0 */	

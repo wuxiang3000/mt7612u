@@ -9,7 +9,7 @@ TARGET = LINUX
 endif
 
 ifeq ($(TARGET), LINUX)
-LINUX_VERSION ?=$(uname -r)
+LINUX_VERSION :=$(uname -r)
 endif
 # CHIPSET
 # rt2860, rt2870, rt2880, rt2070, rt3070, rt3090, rt3572, rt3062, rt3562, rt3593, rt3573
