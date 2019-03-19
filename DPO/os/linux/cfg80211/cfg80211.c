@@ -225,7 +225,7 @@ Note:
 ========================================================================
 */
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,35))
-static int CFG80211_OpsChannelSet(
+static int CFG80211_OpsMonitorChannelSet(
 	IN struct wiphy					*pWiphy,
 	IN struct net_device			*pDev,
 	IN struct ieee80211_channel		*pChan,

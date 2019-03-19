@@ -345,7 +345,11 @@ BOOLEAN CFG80211_SupBandInit(
 		{
 			pChannels[IdLoop].flags = 0;
 			printk("====> Rader Channel %d\n", Cfg80211_Chan[IdLoop]);
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,16,0))
+			pChannels[IdLoop].flags |= (IEEE80211_CHAN_RADAR | NL80211_RRF_PASSIVE_SCAN);
+#else
 			pChannels[IdLoop].flags |= (IEEE80211_CHAN_RADAR | IEEE80211_CHAN_PASSIVE_SCAN);
+#endif
 		}
 /*		CFG_TODO:
 		pChannels[IdLoop].flags
@@ -1037,24 +1041,27 @@ void CFG80211OS_P2pClientConnectResultInform(
 
 BOOLEAN CFG80211OS_RxMgmt(IN PNET_DEV pNetDev, IN INT32 freq, IN PUCHAR frame, IN UINT32 len) 
 {
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,4,0))
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,15,0))
+	return cfg80211_rx_mgmt(pNetDev,
+				freq,
+				0,       //CFG_TODO return 0 in dbm
+				frame,
+				len, 0,
+				GFP_ATOMIC);
+#elif (LINUX_VERSION_CODE >= KERNEL_VERSION(3,4,0))
 	return cfg80211_rx_mgmt(pNetDev,
 				freq,
 				0,       //CFG_TODO return 0 in dbm
 				frame,
 				len,
 				GFP_ATOMIC); 
-#else
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,37))
+#elif (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,37))
         return cfg80211_rx_mgmt(pNetDev, freq, frame, len, GFP_ATOMIC);
-#else
 
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,34))
+#elif (LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,34))
 	return cfg80211_rx_action(pNetDev, freq, frame, len, GFP_ATOMIC);
 #else
 	return FALSE;
-#endif /* LINUX_VERSION_CODE 2.6.34*/
-#endif /* LINUX_VERSION_CODE 2.6.37*/
 #endif /* LINUX_VERSION_CODE 3.4.0*/
 
 }
