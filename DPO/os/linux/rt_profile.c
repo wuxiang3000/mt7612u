@@ -196,7 +196,7 @@ NDIS_STATUS	RTMPReadParametersHook(RTMP_ADAPTER *pAd)
 #ifndef OS_ABL_SUPPORT
 			// TODO: need to roll back when convert into OSABL code
 #if LINUX_VERSION_CODE <= KERNEL_VERSION(4,4,0)
-				fsize = (ULONG)file_inode(srcf)srcf->f_dentry->d_inode->i_size;
+				fsize = (ULONG)srcf->f_dentry->d_inode->i_size;
 #else
 				fsize = (ULONG)file_inode(srcf)->i_size;
 #endif

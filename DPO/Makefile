@@ -8,6 +8,9 @@ ifeq ($(TARGET),)
 TARGET = LINUX
 endif
 
+ifeq ($(TARGET), LINUX)
+LINUX_VERSION ?=$(uname -r)
+endif
 # CHIPSET
 # rt2860, rt2870, rt2880, rt2070, rt3070, rt3090, rt3572, rt3062, rt3562, rt3593, rt3573
 # rt3562(for rt3592), rt3050, rt3350, rt3352, rt5350, rt5370, rt5390, rt5572, rt5592, 
@@ -199,10 +202,10 @@ endif
 
 ifeq ($(PLATFORM),PC)
 # Linux 2.6
-LINUX_SRC = /lib/modules/$(shell uname -r)/build
+LINUX_SRC = /lib/modules/$(LINUX_VERSION)/build
 # Linux 2.4 Change to your local setting
 #LINUX_SRC = /usr/src/linux-2.4
-LINUX_SRC_MODULE = /lib/modules/$(shell uname -r)/kernel/drivers/net/wireless/
+LINUX_SRC_MODULE = /lib/modules/$(LINUX_VERSION)/kernel/drivers/net/wireless/
 CROSS_COMPILE = 
 endif
 
