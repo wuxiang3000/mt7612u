@@ -3327,7 +3327,8 @@ INT RTMPQueryInformation(
     NDIS_802_11_AUTHENTICATION_MODE AuthMode;
     NDIS_802_11_WEP_STATUS WepStatus;
     NDIS_MEDIA_STATE MediaState;
-    ULONG BssBufSize, ulInfo=0, NetworkTypeList[4], apsd = 0, RateValue=0;
+    ULONG BssBufSize, ulInfo=0, NetworkTypeList[4], apsd = 0;
+	int RateValue=0;
     USHORT BssLen = 0;
     PUCHAR pBuf = NULL, pPtr;
     INT Status = NDIS_STATUS_SUCCESS;
@@ -7543,7 +7544,7 @@ RtmpIoctl_rt_ioctl_giwrate(RTMP_ADAPTER *pAd, VOID *pData, ULONG Data)
     else
         ht_setting.word = pAd->MacTab.Content[BSSID_WCID].HTPhyMode.word;
 RtmpDrvRateGet(NULL,ht_setting.field.MODE,ht_setting.field.ShortGI,ht_setting.field.BW
-	,ht_setting.field.MCS,newRateGetAntenna(ht_setting.field.MCS),(UINT32 *)pData);
+	,ht_setting.field.MCS,newRateGetAntenna(ht_setting.field.MCS),(int *)pData);
 
 	return NDIS_STATUS_SUCCESS;
 }

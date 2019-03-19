@@ -747,6 +747,8 @@ PHONY := clean install uninstall
 clean:
 	rm -f ../../common/*.o
 	rm -f ../../common/.*.{cmd,flags,d}
+	rm -rf ../../tx_rx/*.o
+	rm -rf ../../tx_rx/.*.{cmd,flags,d}
 	rm -f ../../os/linux/*.{o,ko,mod.{o,c}}
 	rm -f ../../os/linux/.*.{cmd,flags,d}
 	rm -fr ../../os/linux/.tmp_versions

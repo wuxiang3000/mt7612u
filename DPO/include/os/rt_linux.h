@@ -284,8 +284,13 @@ typedef struct file* RTMP_OS_FD;
 
 typedef struct _OS_FS_INFO_
 {
+#if LINUX_VERSION_CODE <= KERNEL_VERSION(4,4,0)
 	int				fsuid;
 	int				fsgid;
+#else
+	kuid_t 			fsuid;
+	kgid_t 			fsgid;
+#endif
 	mm_segment_t	fs;
 } OS_FS_INFO;
 
@@ -536,9 +541,11 @@ typedef struct tasklet_struct  *POS_NET_TASK_STRUCT;
 
 typedef struct timer_list	OS_NDIS_MINIPORT_TIMER;
 typedef struct timer_list	OS_TIMER;
-
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 15, 0))
+typedef void (*TIMER_FUNCTION)(struct timer_list *);
+#else
 typedef void (*TIMER_FUNCTION)(unsigned long);
-
+#endif
 
 #define OS_WAIT(_time) \
 {	\

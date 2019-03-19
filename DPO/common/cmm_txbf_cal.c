@@ -2469,7 +2469,7 @@ INT ITxBFPhaseCalibration(
 
 	case 1:
 		/* Remove Divider phase */
-		ITxBFDividerCalibrationStartUp(pAd, 1, 0, divPhase);
+		ITxBFDividerCalibrationStartUp(pAd, 1, 0, (UCHAR *)divPhase);
 		phaseValues[0] -= divPhase[0];
 
 		DBGPRINT(RT_DEBUG_TRACE, (

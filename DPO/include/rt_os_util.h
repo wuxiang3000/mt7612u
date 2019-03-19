@@ -514,7 +514,7 @@ VOID RtmpDrvRateGet(
 	IN UINT8 BW,
 	IN UINT8 MCS,
 	IN UINT8 Antenna,
-	OUT UINT32 *pRate);
+	OUT int *pRate);
 
 char * rtstrchr(const char * s, int c);
 

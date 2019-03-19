@@ -88,7 +88,7 @@ VOID RtmpDrvRateGet(
 	IN	UINT8					BW,
 	IN	UINT8					MCS,
 	IN  UINT8                   Antena,
-	OUT	UINT32					*pRate);
+	OUT	ULONG					*pRate);
 
 
 #ifdef DOT11_N_SUPPORT

@@ -474,7 +474,7 @@ static int CFG80211_OpsScan(
 	union iwreq_data Wreq;
 
 	CFG80211DBG(RT_DEBUG_TRACE, ("========================================================================\n"));
-	CFG80211DBG(RT_DEBUG_TRACE, ("80211> %s ==> %s(%d)\n", __FUNCTION__, pNdev->name, pNdev->ieee80211_ptr->iftype));
+	//CFG80211DBG(RT_DEBUG_TRACE, ("80211> %s ==> %s(%d)\n", __FUNCTION__, pNdev->name, pNdev->ieee80211_ptr->iftype));
 	MAC80211_PAD_GET(pAd, pWiphy);
 
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,6,0))
@@ -825,8 +825,11 @@ static int CFG80211_OpsStaGet(
 	{
 		pSinfo->txrate.flags = RATE_INFO_FLAGS_MCS;
 		if (StaInfo.TxRateFlags & RT_CMD_80211_TXRATE_BW_40)
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 15, 0))
+			pSinfo->txrate.flags |= RATE_INFO_BW_40;
+#else
 			pSinfo->txrate.flags |= RATE_INFO_FLAGS_40_MHZ_WIDTH;
-
+#endif
 		if (StaInfo.TxRateFlags & RT_CMD_80211_TXRATE_SHORT_GI)
 			pSinfo->txrate.flags |= RATE_INFO_FLAGS_SHORT_GI;
 

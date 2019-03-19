@@ -3,6 +3,10 @@ include $(RT28xx_DIR)/os/linux/config.mk
 PHONY := clean install uninstall
 
 clean:
+	rm -rf ../../tx_rx/*.o
+	rm -rf ../../tx_rx/.*.cmd .*.flags .*.d
+	
+	rm -rf ../../tools/bin2h
 	rm -f ../../common/*.o
 	rm -f ../../common/.*.cmd .*.flags .*.d
 	rm -f ../../os/linux/*.o *.ko *.mod.o *.mod.c

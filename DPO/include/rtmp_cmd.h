@@ -685,7 +685,7 @@ typedef struct __RT_CMD_AP_IOCTL_SSID {
 
 typedef struct __RT_CMD_IOCTL_RATE {
 	IN ULONG priv_flags;
-	OUT UINT32 BitRate;
+	OUT int BitRate;
 } RT_CMD_IOCTL_RATE;
 
 #define RTMP_CMD_STA_MODE_AUTO			0x00

@@ -3918,7 +3918,7 @@ INT Set_ATE_Load_E2P_From_Buf_Proc(
 
 	if (value > 0)
 	{
-		rt_ee_write_all(pAd, pAd->EEPROMImage);
+		rt_ee_write_all(pAd, (USHORT *)pAd->EEPROMImage);
 		ret = TRUE;
 	
 	}

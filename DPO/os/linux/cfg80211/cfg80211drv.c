@@ -699,7 +699,7 @@ BOOLEAN CFG80211DRV_StaGet(
 #ifdef CONFIG_AP_SUPPORT
 {
 	MAC_TABLE_ENTRY *pEntry;
-	ULONG DataRate = 0;
+	int DataRate = 0;
 	UINT32 RSSI;
 
 
@@ -751,7 +751,7 @@ BOOLEAN CFG80211DRV_StaGet(
 #ifdef CONFIG_STA_SUPPORT
 {
 	HTTRANSMIT_SETTING PhyInfo;
-	ULONG DataRate = 0;
+	int DataRate = 0;
 	UINT32 RSSI;
 
 
