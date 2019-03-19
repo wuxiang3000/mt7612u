@@ -276,7 +276,11 @@ static void CFG80211_UpdateBssTableRssi(
 			/* HIT */
 			CFG80211_CalBssAvgRssi(pBssEntry);
 			bss->signal = pBssEntry->AvgRssi * 100; //UNIT: MdBm
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3,16,0))
+			cfg80211_put_bss(pWiphy, bss);
+#else
 			cfg80211_put_bss(bss);
+#endif
 		}
 	}	
 }
